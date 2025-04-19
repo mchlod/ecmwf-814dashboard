@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portale ECMWF - Dashboard Meteo</title>
+  <title>🌍 ECMWF Portale Meteo</title>
+  <link rel="icon" type="image/png" href="https://www.ecmwf.int/themes/custom/ecmwf/logo.png">
   <style>
     * {
       box-sizing: border-box;
@@ -55,12 +55,12 @@
 <body>
   <nav>
     <h2>📊 ECMWF Dashboard</h2>
-    <button onclick="loadPage('ecmwf-6mappe-final.html')">Anomalie + EFI</button>
-    <button onclick="loadPage('ecmwf-meteogrammi-svizzera-dinamico.html')">Meteogrammi Svizzera</button>
-    <button onclick="loadPage('ecmwf-regimi-hovmoller-dinamico.html')">Regimi & Hovmöller</button>
+    <button onclick="loadPage('./ecmwf-6mappe-final.html')">Anomalie + EFI</button>
+    <button onclick="loadPage('./ecmwf-meteogrammi-svizzera-dinamico.html')">Meteogrammi Svizzera</button>
+    <button onclick="loadPage('./ecmwf-regimi-hovmoller-dinamico.html')">Regimi & Hovmöller</button>
   </nav>
   <main>
-    <iframe id="main-frame" src="ecmwf-6mappe-final.html"></iframe>
+    <iframe id="main-frame" src="./ecmwf-6mappe-final.html"></iframe>
   </main>
 
   <script>
