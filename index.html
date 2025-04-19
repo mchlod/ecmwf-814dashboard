@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌍 Portale 8-14 v1.0 </title>
-  <link rel="icon" type="image/png" href="https://www.ecmwf.int/themes/custom/ecmwf/logo.png">
+  <title>🌍 ECMWF Portale Meteo</title>
+  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Smiling_goat.jpg/64px-Smiling_goat.jpg">
   <style>
     * {
       box-sizing: border-box;
@@ -65,10 +65,48 @@
       color: #003366;
       text-align: center;
     }
+    .dark-mode body {
+      background-color: #111;
+      color: #eee;
+    }
+    .dark-mode nav {
+      background-color: #222;
+      color: #eee;
+    }
+    .dark-mode header {
+      background-color: #111;
+      color: #eee;
+    }
+    .dark-mode main {
+      background-color: #1a1a1a;
+      color: #eee;
+    }
+    .dark-mode nav button:hover {
+      background-color: #444;
+    }
+    .pizza-mode body {
+      background-color: #fff3e0;
+      color: #5c2e00;
+    }
+    .pizza-mode nav {
+      background-color: #ffa726;
+      color: #5c2e00;
+    }
+    .pizza-mode header {
+      background-color: #fb8c00;
+      color: #fff;
+    }
+    .pizza-mode main {
+      background-color: #ffe0b2;
+      color: #5c2e00;
+    }
+    .pizza-mode nav button:hover {
+      background-color: #ffb74d;
+    }
   </style>
 </head>
 <body>
-  <header>🌍 Portale 8-14 </header>
+  <header>🌍 ECMWF Portale Meteo<button onclick="toggleDarkMode()" style="position: absolute; right: 20px; top: 10px; background: #222; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;"><span id="darkToggleIcon">🌙</span> Mode</button></header>
   <div class="container">
     <nav>
       <h2>📊 ECMWF Dashboard</h2>
@@ -76,18 +114,49 @@
       <button onclick="window.open('ecmwf-meteogrammi-svizzera-dinamico.html', '_blank')">Meteogrammi Svizzera</button>
       <button onclick="window.open('ecmwf-regimi-hovmoller-dinamico.html', '_blank')">Regimi & Hovmöller</button>
       <h2>🔗 Link Esterni ECMWF</h2>
-      <button onclick="window.open('https://charts.ecmwf.int/products/extended-anomaly-z500', '_blank')">Z500</button>
-      <button onclick="window.open('https://charts.ecmwf.int/products/extended-anomaly-2t', '_blank')">2m Temp</button>
-      <button onclick="window.open('https://charts.ecmwf.int/products/extended-anomaly-mslp', '_blank')">MSLP</button>
-      <button onclick="window.open('https://charts.ecmwf.int/products/extended-efi-sot-2t', '_blank')">EFI Temp</button>
-      <button onclick="window.open('https://charts.ecmwf.int/products/extended-efi-sot-tp', '_blank')">EFI Precip</button>
-      <button onclick="window.open('https://charts.ecmwf.int/products/opencharts_extended_meteogram', '_blank')">Meteogrammi</button>
+      <button onclick="window.open('https://charts.ecmwf.int/products/extended-anomaly-z500', '_blank')">Z500 ECMWF</button>
+      <button onclick="window.open('https://charts.ecmwf.int/products/extended-anomaly-2t', '_blank')">2m Temp ECMWF</button>
+      <button onclick="window.open('https://charts.ecmwf.int/products/extended-anomaly-mslp', '_blank')">MSLP ECMWF</button>
+      <button onclick="window.open('https://charts.ecmwf.int/products/extended-efi-sot-2t', '_blank')">EFI Temp ECMWF</button>
+      <button onclick="window.open('https://charts.ecmwf.int/products/extended-efi-sot-tp', '_blank')">EFI Precip ECMWF</button>
+      <button onclick="window.open('https://charts.ecmwf.int/products/opencharts_extended_meteogram', '_blank')">Meteogrammi ECMWF</button>
     </nav>
     <main>
-      <div class="notice">
-        Seleziona una voce dal menu per aprirla in una nuova scheda.
-      </div>
+      <p class="notice">🐐 Credi nel potere delle mappe. Anche le capre sorridono quando arriva un'onda di geopotenziale!</p>
     </main>
   </div>
+<script>
+  function toggleDarkMode() {
+    const body = document.body;
+    const icon = document.getElementById("darkToggleIcon");
+
+    if (body.classList.contains("dark-mode")) {
+      body.classList.remove("dark-mode");
+      body.classList.add("pizza-mode");
+      icon.textContent = "🍕";
+      localStorage.setItem("mode", "pizza");
+    } else if (body.classList.contains("pizza-mode")) {
+      body.classList.remove("pizza-mode");
+      icon.textContent = "🌙";
+      localStorage.setItem("mode", "day");
+    } else {
+      body.classList.add("dark-mode");
+      icon.textContent = "☀️";
+      localStorage.setItem("mode", "dark");
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const mode = localStorage.getItem("mode");
+    const icon = document.getElementById("darkToggleIcon");
+    if (mode === "dark") {
+      document.body.classList.add("dark-mode");
+      if (icon) icon.textContent = "☀️";
+    } else if (mode === "pizza") {
+      document.body.classList.add("pizza-mode");
+      if (icon) icon.textContent = "🍕";
+    }
+  });
+</script>
 </body>
 </html>
