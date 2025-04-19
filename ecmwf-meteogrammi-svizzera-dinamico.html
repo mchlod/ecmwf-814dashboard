@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Meteogrammi ECMWF Dinamici - Svizzera</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      padding: 20px;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin: 30px 0 10px;
+      font-size: 1.4rem;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 95%;
+      max-width: 800px;
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+
+    .caption {
+      font-weight: bold;
+      font-size: 1.1rem;
+      padding: 10px;
+      background-color: #f8f8f8;
+    }
+  </style>
+</head>
+<body>
+  <h1>Meteogrammi ECMWF - Svizzera</h1>
+
+  <h2>Meteogrammi a 15 giorni</h2>
+  <div class="grid">
+    <div class="card">
+      <iframe id="meteogram-lugano"></iframe>
+      <div class="caption">Lugano</div>
+    </div>
+    <div class="card">
+      <iframe id="meteogram-ginevra"></iframe>
+      <div class="caption">Ginevra</div>
+    </div>
+    <div class="card">
+      <iframe id="meteogram-zurigo"></iframe>
+      <div class="caption">Zurigo</div>
+    </div>
+  </div>
+
+  <h2>Meteogrammi Extended Range</h2>
+  <div class="grid">
+    <div class="card">
+      <iframe id="meteogramx-lugano"></iframe>
+      <div class="caption">Lugano</div>
+    </div>
+    <div class="card">
+      <iframe id="meteogramx-ginevra"></iframe>
+      <div class="caption">Ginevra</div>
+    </div>
+    <div class="card">
+      <iframe id="meteogramx-zurigo"></iframe>
+      <div class="caption">Zurigo</div>
+    </div>
+  </div>
+
+  <script>
+    function getLatestRun() {
+      const today = new Date();
+      const day = today.getUTCDay();
+      const offset = (day >= 4) ? (day - 4) : (day + 3); // giovedì scorso
+      const runDate = new Date(today);
+      runDate.setUTCDate(today.getUTCDate() - offset);
+
+      const yyyy = runDate.getUTCFullYear();
+      const mm = String(runDate.getUTCMonth() + 1).padStart(2, '0');
+      const dd = String(runDate.getUTCDate()).padStart(2, '0');
+
+      return `${yyyy}${mm}${dd}0000`;
+    }
+
+    const base_time = getLatestRun();
+
+    const cities = {
+      "lugano": { lat: 46.0101, lon: 8.96004 },
+      "ginevra": { lat: 46.2044, lon: 6.1432 },
+      "zurigo": { lat: 47.3769, lon: 8.5417 }
+    };
+
+    for (const [name, coords] of Object.entries(cities)) {
+      document.getElementById(`meteogram-${name}`).src =
+        `https://charts.ecmwf.int/products/opencharts_meteogram?base_time=${base_time}&lat=${coords.lat}&lon=${coords.lon}&station_name=${name}`;
+      document.getElementById(`meteogramx-${name}`).src =
+        `https://charts.ecmwf.int/products/opencharts_extended_meteogram?base_time=${base_time}&lat=${coords.lat}&lon=${coords.lon}&station_name=${name}`;
+    }
+  </script>
+</body>
+</html>

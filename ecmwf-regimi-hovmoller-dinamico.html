@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>ECMWF - Regimi e Hovmöller Dinamici</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .iframe-container {
+      margin-bottom: 40px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    iframe {
+      width: 100%;
+      height: 700px;
+      border: none;
+    }
+
+    .caption {
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 10px;
+      background-color: #eeeeee;
+    }
+  </style>
+</head>
+<body>
+  <h1>ECMWF - Regimi e Hovmöller (Run più recente)</h1>
+
+  <div class="iframe-container">
+    <iframe src="https://charts.ecmwf.int/products/extended-regime-probabilities?forecast_from=latest"></iframe>
+    <div class="caption">Probabilità dei Regimi Atmosferici - ECMWF Extended</div>
+  </div>
+
+  <div class="iframe-container">
+    <iframe id="hovmoller"></iframe>
+    <div class="caption">Hovmöller 500 hPa - Nord Emisfero</div>
+  </div>
+
+  <script>
+    function getLatestRunDate() {
+      const today = new Date();
+      const day = today.getUTCDay();
+      const offset = (day >= 4) ? (day - 4) : (day + 3); // Giovedì più recente
+      const runDate = new Date(today);
+      runDate.setUTCDate(today.getUTCDate() - offset);
+
+      const yyyy = runDate.getUTCFullYear();
+      const mm = String(runDate.getUTCMonth() + 1).padStart(2, '0');
+      const dd = String(runDate.getUTCDate()).padStart(2, '0');
+
+      return `${yyyy}${mm}${dd}0000`;
+    }
+
+    const base_time = getLatestRunDate();
+    const hov_url = `https://charts.ecmwf.int/products/mofc_multi_eps_family_hovmoller?area=North%20Hemisphere&base_time=${base_time}&parameter=geopotential%20500%20hPa`;
+    document.getElementById("hovmoller").src = hov_url;
+  </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+ <head>
+  <meta charset="utf-8"/>
+  <title>
+   ECMWF - Extended Anomalie, EFI, SOT, Multiparam (Fix)
+  </title>
+  <style>
+   body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      padding: 10px;
+      margin: 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 1.6rem;
+    }
+
+    .controls {
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 8px 16px;
+      font-size: 14px;
+      margin: 4px;
+      border: none;
+      background-color: #0077cc;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    #run-info {
+      margin-top: 5px;
+      font-weight: bold;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    iframe {
+      width: 100%;
+      height: 550px;
+      border: none;
+    }
+
+    .caption {
+      font-weight: bold;
+      padding: 6px;
+      background-color: #f0f0f0;
+      font-size: 1rem;
+    }
+  </style>
+ </head>
+ <body>
+  <h1>
+   Mappe ECMWF Extended - Anomalie, EFI, SOT, Multiparam
+  </h1>
+  <div class="controls">
+   <button onclick="forwardOneWeek()">
+    ⏩ +1 settimana
+   </button>
+   <button onclick="goBackOneRun()">
+    ⬅ Run precedente
+   </button>
+   <button onclick="goForwardOneRun()">
+    ➡ Run successiva
+   </button>
+   <button onclick="resetRun()">
+    🔄 Reset
+   </button>
+   <div id="run-info">
+   </div>
+  </div>
+  <div class="grid">
+   <div class="card">
+    <iframe id="mslp">
+    </iframe>
+    <div class="caption">
+     MSLP Anomaly
+    </div>
+   </div>
+   <div class="card">
+    <iframe id="z500">
+    </iframe>
+    <div class="caption">
+     Z500 Anomaly
+    </div>
+   </div>
+   <div class="card">
+    <iframe id="t2m">
+    </iframe>
+    <div class="caption">
+     2m Temp Anomaly
+    </div>
+   </div>
+   <div class="card">
+    <iframe id="efi_t2m">
+    </iframe>
+    <div class="caption">
+     EFI 2m Temp (Extended)
+    </div>
+   </div>
+   <div class="card">
+    <iframe id="tp">
+    </iframe>
+    <div class="caption">
+     Total Precip Anomaly
+    </div>
+   </div>
+   <div class="card">
+   </div>
+  </div>
+ </body>
+</html>
