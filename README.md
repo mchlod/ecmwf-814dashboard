@@ -1,4 +1,4 @@
-# 🌍 ECMWF Dashboard Meteo - Goat Edition 🐐
+# 🌍 ECMWF Dashboard 8-14 - Goat Edition 🐐
 
 Portale meteo personalizzato per la visualizzazione rapida dei prodotti ECMWF:
 - Anomalie settimanali
